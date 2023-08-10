@@ -5,8 +5,8 @@ module tt_um_electronic_lock_LeoGLM(
     input  wire       clk,              // clock
     input  wire       rst_n             // reset_n - low to reset
 );
-    assign userinput = [3:0] ui_in      //1111: no input, 1110: set_passcode, 0001-1001: 1-0 ；1101:cancel
-    assign lock      =       uo_out,
+    assign userinput = [3:0] ui_in ;     //1111: no input, 1110: set_passcode, 0001-1001: 1-0 ；1101:cancel
+    assign lock      =       uo_out;
 
     //output [3:0]states,
     //output [2:0]counters
