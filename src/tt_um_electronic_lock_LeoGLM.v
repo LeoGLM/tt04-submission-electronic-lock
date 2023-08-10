@@ -1,6 +1,7 @@
 module tt_um_electronic_lock_LeoGLM(
     input  wire [7:0] ui_in,            // Dedicated inputs
-    output wire [7:0] uo_out,           // Dedicated outputs    
+    output wire [7:0] uo_out,           // Dedicated outputs  
+    input  wire       ena, 
     input  wire       clk,              // clock
     input  wire       rst_n             // reset_n - low to reset
 );
