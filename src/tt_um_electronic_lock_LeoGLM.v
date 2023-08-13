@@ -15,13 +15,13 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     assign userinput =       ui_in [3:0];     //1111: no input, 1110: set_passcode, 0001-1001: 1-0 ；1101:cancel
     assign uo_out[0] =       lock  ;
     
-    assign uo_out[1] = 1'b0;
+    /*assign uo_out[1] = 1'b0;
     assign uo_out[2] = 1'b0;
     assign uo_out[3] = 1'b0;
     assign uo_out[4] = 1'b0;
     assign uo_out[5] = 1'b0;
     assign uo_out[6] = 1'b0;
-    assign uo_out[7] = 1'b0;
+    assign uo_out[7] = 1'b0;*/
 
     //output [3:0]states,
     //output [2:0]counters
