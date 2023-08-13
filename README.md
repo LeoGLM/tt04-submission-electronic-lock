@@ -8,7 +8,7 @@ Go to https://tinytapeout.com for instructions!
 
 ## How to change the Wokwi project
 
-Edit the [info.yaml](info.yaml) and change the wokwi_id to match your project.
+Edit the [info.yaml](info.yaml) and change the wokwi_id to match your projec.
 
 ## How to enable the GitHub actions to build the ASIC files
 
