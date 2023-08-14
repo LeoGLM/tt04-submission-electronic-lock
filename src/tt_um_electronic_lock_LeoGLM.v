@@ -6,7 +6,10 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n     // reset_n - low to reset  
+    input  wire       rst_n,     // reset_n - low to reset  
+    output [3:0]states,
+    output [2:0]counters
+
 );
     
     wire [3:0] userinput;
@@ -15,16 +18,13 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     assign userinput =       ui_in [3:0];     //1111: no input, 1110: set_passcode, 0001-1001: 1-0 ；1101:cancel
     assign uo_out[0] =       lock  ;
     
-    /*assign uo_out[1] = 1'b0;
+    assign uo_out[1] = 1'b0;
     assign uo_out[2] = 1'b0;
     assign uo_out[3] = 1'b0;
     assign uo_out[4] = 1'b0;
     assign uo_out[5] = 1'b0;
     assign uo_out[6] = 1'b0;
-    assign uo_out[7] = 1'b0;*/
-
-    //output [3:0]states,
-    //output [2:0]counters
+    assign uo_out[7] = 1'b0;
 
     parameter IDLE        = 4'd0;
     parameter correct1    = 4'd1;
@@ -50,18 +50,11 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     always@(posedge clk) begin
         if (!rst_n) begin
             state        <= IDLE;
-            pc1          <= 4'b0000;
-            pc2          <= 4'b0000;
-            pc3          <= 4'b0000;
-            pc4          <= 4'b0000;
             counter      <= 0;
-            unlocked_reg <= 0;
         end
         else begin   
-            if (counter==5) begin
-                unlocked_reg <= 0;
+            if (counter==5) 
                 counter      <= 0;
-            end
             else if (unlocked_reg == 1) 
                 counter      <= counter+1;
 
@@ -71,8 +64,18 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
                 state        <= nextstate;
         end
     end
-    always@(userinput) begin
-        if (userinput == 4'b1101)
+    always@(userinput,rst_n,counter) begin
+        if (rst_n == 0) begin
+            nextstate = IDLE;
+            pc1          = 4'b0000;
+            pc2          = 4'b0000;
+            pc3          = 4'b0000;
+            pc4          = 4'b0000;
+            unlocked_reg = 0;
+        end
+        else if (counter == 5)
+            unlocked_reg = 0;
+        else if (userinput == 4'b1101)
             nextstate = IDLE;
         else if (userinput == 4'b1111)
             nextstate = state;
@@ -135,6 +138,6 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     end
  
     assign lock = unlocked_reg;
-    //assign states = state;
-    //assign counters = counter;
+    assign states = state;
+    assign counters = counter;
 endmodule
