@@ -7,8 +7,8 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
     input  wire       rst_n,     // reset_n - low to reset  
-    output [3:0]states,
-    output [2:0]counters
+    //output [3:0]states,
+    //output [2:0]counters
 
 );
     
@@ -138,6 +138,6 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     end
  
     assign lock = unlocked_reg;
-    assign states = state;
-    assign counters = counter;
+    //assign states = state;
+    //assign counters = counter;
 endmodule
