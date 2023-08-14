@@ -6,7 +6,7 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n     // reset_n - low to reset 
+    input  wire       rst_n     // reset_n - low to reset  
 );
     
     wire [3:0] userinput;
