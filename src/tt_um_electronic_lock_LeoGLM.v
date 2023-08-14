@@ -71,7 +71,7 @@ module tt_um_electronic_lock_LeoGLM #( parameter MAX_COUNT = 10_000_000 ) (
                 state        <= nextstate;
         end
     end
-    always@(userinput,counter) begin
+    always@(userinput) begin
         if (userinput == 4'b1101)
             nextstate = IDLE;
         else if (userinput == 4'b1111)
